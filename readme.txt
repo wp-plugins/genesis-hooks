@@ -1,6 +1,6 @@
 === Genesis Hooks ===
 Contributors: wpsmith, rafaltomal
-Plugin URI: http://www.wpsmith.net/genesis-hooks
+Plugin URI: http://www.wpsmith.net/my-plugins/genesis-hooks
 Donate link: http://www.wpsmith.net/donation
 Tags: genesis, studiopress, hooks
 Requires at least: 3.0
@@ -10,7 +10,7 @@ Automatically displays Genesis structual hook names in the browser for all pages
 
 == Description ==
 
-Genesis Hooks...
+Genesis Hooks automatically displays Genesis structual hook names in the browser for all pages. It also allows you to add any hooks that you may have added to various pages like templates or the home page.
 
 IMPORTANT: 
 **You must have [Genesis](http://wpsmith.net/go/genesis "Purchase Genesis") installed. Click [here](http://wpsmith.net/go/genesis "Purchase Genesis") to purchase [Genesis](http://wpsmith.net/go/genesis "Purchase Genesis")**
@@ -25,13 +25,15 @@ IMPORTANT:
 == Frequently Asked Questions ==
 
 = Do you have future plans for this plugin? =
-Coming soon...
+None at this time.
 
 * If you have suggestions, please feel free to [contact me](http://wpsmith.net/contact/ "Contact Travis")
 
 == Screenshots ==
 
-Coming soon...
+1. Screenshot before activating the plugin.
+2. Screenshot after activating the plugin.
+3. The code when you use Developer tool in Google Chrome.
 
 == Changelog ==
 
