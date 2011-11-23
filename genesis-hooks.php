@@ -4,7 +4,7 @@
 Plugin Name: Genesis Hooks
 Plugin URI: http://www.wpsmith.net/genesis-hooks
 Description: Automatically displays Genesis structual hook names in the browser for all pages.
-Version: 0.1.1
+Version: 0.2
 Author: Travis Smith & Rafal Tomal
 Author URI: http://www.wpsmith.net/
 License: GPLv2
@@ -181,7 +181,20 @@ function genesis_hooks_setup () {
 								'genesis_before_footer',
 								'genesis_footer',
 								'genesis_after_footer',
-								'genesis_after'
+								'genesis_after',
+								// Add Genesis Featured Widget Amplified Hooks
+								'gfwa_before_loop',
+								'gfwa_before_post_content',
+								'gfwa_post_content',
+								'gfwa_after_post_content',
+								'gfwa_endwhile',
+								'gfwa_after_loop',
+								'gfwa_list_items',
+								'gfwa_print_list_items',
+								'gfwa_category_more',
+								'gfwa_after_category_more',
+								'gfwa_form_first_column',
+								'gfwa_form_second_column',
 							);
 							
 	$genesis_settings = get_option( 'genesis-settings' );
