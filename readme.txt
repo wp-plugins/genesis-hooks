@@ -37,6 +37,9 @@ None at this time.
 
 == Changelog ==
 
+= 0.2 =
+* Add Genesis Featured Widget Amplified Support
+
 = 0.1 =
 * Private Beta
 
