@@ -37,8 +37,11 @@ None at this time.
 
 == Changelog ==
 
+= 0.3 =
+* Added WordPress Comment Form Actions (not supported by Genesis)
+
 = 0.2 =
-* Add Genesis Featured Widget Amplified Support
+* Added Genesis Featured Widget Amplified Support
 
 = 0.1 =
 * Private Beta
