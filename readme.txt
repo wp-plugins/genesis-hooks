@@ -4,7 +4,7 @@ Plugin URI: http://www.wpsmith.net/my-plugins/genesis-hooks
 Donate link: http://www.wpsmith.net/donation
 Tags: genesis, studiopress, hooks
 Requires at least: 3.0
-Tested up to: 3.2
+Tested up to: 3.3
 
 Automatically displays Genesis structual hook names in the browser for all pages.
 
