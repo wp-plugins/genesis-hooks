@@ -37,6 +37,9 @@ None at this time.
 
 == Changelog ==
 
+= 0.4 =
+* Added Role/Capability filter option
+
 = 0.3 =
 * Added WordPress Comment Form Actions (not supported by Genesis)
 

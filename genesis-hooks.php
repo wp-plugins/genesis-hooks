@@ -4,7 +4,7 @@
 Plugin Name: Genesis Hooks
 Plugin URI: http://www.wpsmith.net/genesis-hooks
 Description: Automatically displays Genesis structual hook names in the browser for all pages.
-Version: 0.3
+Version: 0.4
 Author: Travis Smith & Rafal Tomal
 Author URI: http://www.wpsmith.net/
 License: GPLv2
@@ -82,7 +82,10 @@ function gh_action_links( $links ) {
 
 add_filter( 'genesis_theme_settings_defaults', 'genesis_hooks_defaults' );
 function genesis_hooks_defaults ( $defaults ) {
-	$defaults[ 'gh_custom_hooks' ] = '';
+	$defaults = array(
+		'gh_custom_hooks' => '',
+		'gh_role' => 'administrator',
+	);
 	
 	return $defaults;
 }
@@ -108,17 +111,37 @@ function gh_theme_settings_boxes () {
     add_meta_box( 'genesis-theme-settings-hooks' , __( 'Genesis Hooks Settings', GH_DOMAIN ), 'genesis_theme_settings_hooks_box' , $_genesis_theme_settings_pagehook , 'column2' );
 }
 
+
+
 function genesis_theme_settings_hooks_box () { ?>
 	<p></p>
 	
 	<p><label for="<?php echo GENESIS_SETTINGS_FIELD; ?>[gh_custom_hooks]"><?php _e( 'Enter your custom hooks here using a comma to separate hooks.', GH_DOMAIN ); ?></label></p>
 	<input type="text" size="100" name="<?php echo GENESIS_SETTINGS_FIELD; ?>[gh_custom_hooks]" id="gh_custom_hooks" value="<?php echo ( genesis_get_option('gh_custom_hooks' ) ) ? esc_attr( genesis_get_option( 'gh_custom_hooks' ) ) : ''; ?>" />
-	
 
 	<p><span class="description"><?php printf( __( '(e.g., genesis_home,genesis_before).', GH_DOMAIN ) ); ?></span></p>
 	
+	<p><label for="<?php echo GENESIS_SETTINGS_FIELD; ?>[gh_custom_hooks]"><?php _e( 'Select the appropriate role level to view the hooks.', GH_DOMAIN ); ?></label></p>
+	<p><select name="<?php echo GENESIS_SETTINGS_FIELD; ?>[gh_role]" id="gh_role">
+		<?php wp_dropdown_roles( genesis_get_option('gh_role' ) ); ?>
+	</select></p>
+	<p><span class="description"><?php printf( __( '(e.g., If you select Editor, only those who can edit_others_posts (an Editor capability) will be able to see the hooks. This defaults to administrators.).', GH_DOMAIN ) ); ?></span></p>
+	
 <?php
 }
+
+function gh_get_cap( $role ) {
+	$cap = array ( 
+		'administrator' => 'manage_options',
+		'editor' => 'edit_others_posts',
+		'author' => 'edit_published_posts',
+		'contributor' => 'edit_posts',
+		'subscriber' => 'read',
+	);
+	
+	return $cap[$role];
+}
+
 
 // set styles
 add_action( 'wp_print_styles' , 'genesis_hooks_css' );
@@ -220,6 +243,8 @@ function genesis_hooks_setup () {
 }
 
 function genesis_hooks () {
+	if ( ( ! is_user_logged_in() ) || ( ! current_user_can( gh_get_cap( genesis_get_option('gh_role' ) ) ) ) )
+		return;
 	$current_action = current_filter ();
 	echo '<span class="genesis_hook">' . $current_action . '</span>';
 }
