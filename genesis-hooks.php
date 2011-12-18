@@ -8,6 +8,8 @@ Version: 0.4.1
 Author: Travis Smith & Rafal Tomal
 Author URI: http://www.wpsmith.net/
 License: GPLv2
+Text Domain: genesis-hooks
+Domain Path: /languages/
 
     Copyright 2011  Travis Smith  (email : travis@wpsmith.net)
 
@@ -30,9 +32,18 @@ License: GPLv2
  */
 define( 'GH_DOMAIN' , 'genesis-hooks' );
 
+
+/**
+ * Load the text domain for translation of the plugin
+ * 
+ * @since 0.4.1
+ */
+load_plugin_textdomain( 'genesis-hooks', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+
 /* Prevent direct access to the plugin */
 if ( !defined( 'ABSPATH' ) ) {
-    wp_die( __( "Sorry, you are not allowed to access this page directly.", GCB_DOMAIN ) );
+    wp_die( __( "Sorry, you are not allowed to access this page directly.", GH_DOMAIN ) );
 }
 
 register_activation_hook( __FILE__, 'gh_activation_check' );
@@ -52,19 +63,19 @@ function gh_activation_check() {
 
     if ( basename( TEMPLATEPATH ) != 'genesis' ) {
         deactivate_plugins( plugin_basename( __FILE__ ) ); // Deactivate ourself
-        wp_die( sprintf( __( 'Sorry, you can\'t activate unless you have installed and actived %1$sGenesis%2$s or a %3$sGenesis Child Theme%2$s', GCB_DOMAIN ), '<a href="http://wpsmith.net/go/genesis">', '</a>', '<a href="http://wpsmith.net/go/spthemes">' ) );
+        wp_die( sprintf( __( 'Sorry, you can\'t activate unless you have installed and actived %1$sGenesis%2$s or a %3$sGenesis Child Theme%2$s', GH_DOMAIN ), '<a href="http://wpsmith.net/go/genesis">', '</a>', '<a href="http://wpsmith.net/go/spthemes">' ) );
     }
 	
 	$theme_info = get_theme_data(TEMPLATEPATH.'/style.css');
 	
 	if( basename( TEMPLATEPATH ) != 'genesis' ) {
 		deactivate_plugins(plugin_basename(__FILE__)); // Deactivate ourself
-		wp_die('Sorry, you can\'t activate unless you have installed <a href="http://wpsmith.net/go/genesis">Genesis</a>');
+		wp_die( 'Sorry, you can\'t activate unless you have installed <a href="http://wpsmith.net/go/genesis">Genesis</a>', GH_DOMAIN );
 	}
 
 	if ( version_compare( $theme_info['Version'], $latest, '<' ) ) {
 		deactivate_plugins(plugin_basename(__FILE__)); // Deactivate ourself
-		wp_die( sprintf( __( 'Sorry, you can\'t activate without %1$sGenesis %2$s%3$s or greater', GCB_DOMAIN ), '<a href="http://wpsmith.net/go/genesis">', $latest, '</a>' ) );
+		wp_die( sprintf( __( 'Sorry, you can\'t activate without %1$sGenesis %2$s%3$s or greater', GH_DOMAIN ), '<a href="http://wpsmith.net/go/genesis">', $latest, '</a>' ) );
 	}
 	
 	gh_update_check();
@@ -73,12 +84,18 @@ function gh_activation_check() {
 //	add "Settings" link to plugin page
 add_filter( 'plugin_action_links_' . plugin_basename(__FILE__) , 'gh_action_links' );
 function gh_action_links( $links ) {
-	$gh_settings_link = sprintf( '<a href="%s">%s</a>' , admin_url( 'admin.php?page=genesis' ) , __( 'Settings' ) );
+	$gh_settings_link = sprintf( '<a href="%s">%s</a>' , admin_url( 'admin.php?page=genesis' ) , __( 'Settings', GH_DOMAIN ) );
 	array_unshift( $links, $gh_settings_link );
 	return $links;
 }
 
-
+/**
+ * Checks for the Genesis Hooks role option, if it does not exists,
+ * it is added.
+ *
+ * @author Nathan Rice
+ * @since 0.4
+ */
 function gh_update_check() {
 	$options = get_option ( GENESIS_SETTINGS_FIELD );
 	if ( ! $options ['gh_role'] ) {
@@ -88,7 +105,7 @@ function gh_update_check() {
 }
 
 /*
- * Sets defaults in the Genesis Theme Settings
+ * Sets defaults in the Genesis Theme Settings (for Reset Settings)
  */
 add_filter( 'genesis_theme_settings_defaults', 'genesis_hooks_defaults' );
 function genesis_hooks_defaults ( $defaults ) {
@@ -253,7 +270,7 @@ function genesis_hooks_setup () {
 }
 
 function genesis_hooks () {
-	if ( ( ! is_user_logged_in() ) || ( ! current_user_can( gh_get_cap( genesis_get_option('gh_role' ) ) ) ) )
+	if ( ( ! is_user_logged_in() ) || ( ! current_user_can( gh_get_cap( genesis_get_option( 'gh_role' ) ) ) ) )
 		return;
 	$current_action = current_filter ();
 	echo '<span class="genesis_hook">' . $current_action . '</span>';

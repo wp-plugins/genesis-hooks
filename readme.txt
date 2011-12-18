@@ -37,6 +37,9 @@ None at this time.
 
 == Changelog ==
 
+= 0.5 =
+* Added German translation props to deckerweb
+
 = 0.4.1 =
 * Fixed options check
 
