@@ -37,6 +37,9 @@ None at this time.
 
 == Changelog ==
 
+= 0.4.1 =
+* Fixed options check
+
 = 0.4 =
 * Added Role/Capability filter option
 
