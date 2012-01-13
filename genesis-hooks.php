@@ -4,7 +4,7 @@
 Plugin Name: Genesis Hooks
 Plugin URI: http://www.wpsmith.net/genesis-hooks
 Description: Automatically displays Genesis structual hook names in the browser for all pages.
-Version: 0.4.1
+Version: 0.4.2
 Author: Travis Smith & Rafal Tomal
 Author URI: http://www.wpsmith.net/
 License: GPLv2
@@ -100,6 +100,10 @@ function gh_update_check() {
 	$options = get_option ( GENESIS_SETTINGS_FIELD );
 	if ( ! $options ['gh_role'] ) {
 		$options ['gh_role'] = 'administrator';
+		update_option ( GENESIS_SETTINGS_FIELD , $options );
+	}
+	if ( ! $options ['gh_custom_hooks'] ) {
+		$options ['gh_custom_hooks'] = '';
 		update_option ( GENESIS_SETTINGS_FIELD , $options );
 	}
 }
