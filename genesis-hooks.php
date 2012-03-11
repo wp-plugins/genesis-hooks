@@ -4,7 +4,7 @@
 Plugin Name: Genesis Hooks
 Plugin URI: http://www.wpsmith.net/genesis-hooks
 Description: Automatically displays Genesis structual hook names in the browser for all pages.
-Version: 0.4.2
+Version: 0.5
 Author: Travis Smith & Rafal Tomal
 Author URI: http://www.wpsmith.net/
 License: GPLv2
@@ -262,11 +262,17 @@ function genesis_hooks_setup () {
 								'comment_form_after',
 								'comment_form_comments_closed',
 							);
-							
+	
+	//Get sidebars
+	global $wp_registered_sidebars;
+	foreach ( $wp_registered_sidebars as $sidebar ) {
+		$arrGenesisActions[] = 'genesis_before_' . $sidebar['id'] . '_widget_area';
+		$arrGenesisActions[] = 'genesis_after_' . $sidebar['id'] . '_widget_area';
+	}
+	
 	$genesis_settings = get_option( 'genesis-settings' );
 	$custom_genesis_hooks = explode( ',' , $genesis_settings[ 'gh_custom_hooks' ] );
 	$genesis_hooks = array_merge( $arrGenesisActions , $custom_genesis_hooks );
-	
 								
 	foreach ( $genesis_hooks as $action ) {
 		add_action( $action , 'genesis_hooks' , 1 );
@@ -280,3 +286,4 @@ function genesis_hooks () {
 	echo '<span class="genesis_hook">' . $current_action . '</span>';
 }
 ?>
+	

@@ -38,6 +38,9 @@ None at this time.
 == Changelog ==
 
 = 0.5 =
+* Added genesis_widget_area() dynamic hooks
+
+= 0.4.2 =
 * Added German translation props to deckerweb
 
 = 0.4.1 =
