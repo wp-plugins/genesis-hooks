@@ -41,6 +41,9 @@ Requires Genesis 1.8 to upgrade.
 
 == Changelog ==
 
+= 0.6 =
+* Dropped support for versions less than Genesis 1.8
+
 = 0.5 =
 * Added genesis_widget_area() dynamic hooks
 
