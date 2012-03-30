@@ -35,6 +35,10 @@ None at this time.
 2. Screenshot after activating the plugin.
 3. The code when you use Developer tool in Google Chrome.
 
+== Upgrade Notice ==
+
+Requires Genesis 1.8 to upgrade.
+
 == Changelog ==
 
 = 0.5 =
