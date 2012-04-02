@@ -41,6 +41,9 @@ Requires Genesis 1.8 to upgrade.
 
 == Changelog ==
 
+= 0.7 =
+* Fixed strange DEBUG notice
+
 = 0.6 =
 * Dropped support for versions less than Genesis 1.8
 
