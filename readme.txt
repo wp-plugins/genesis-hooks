@@ -13,7 +13,7 @@ Automatically displays Genesis structual hook names in the browser for all pages
 Genesis Hooks automatically displays Genesis structual hook names in the browser for all pages. It also allows you to add any hooks that you may have added to various pages like templates or the home page.
 
 IMPORTANT: 
-**You must have [Genesis](http://wpsmith.net/get-genesis "Purchase Genesis") installed. Click [here](http://wpsmith.net/get-genesis "Purchase Genesis") to purchase [Genesis](http://wpsmith.net/get-genesis "Purchase Genesis")**
+**You must have [Genesis](http://wpsmith.net/get-genesis "Learn more about Genesis") installed. Click [here](http://wpsmith.net/get-genesis "Learn more about Genesis") to learn more about [Genesis](http://wpsmith.net/get-genesis "Learn more about Genesis")**
 
 
 == Installation ==
